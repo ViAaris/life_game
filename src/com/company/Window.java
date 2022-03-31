@@ -17,6 +17,7 @@ public class Window implements Runnable {
         createWindow();
         initBoxes();
         createColony();
+        initTimer();
     }
 
     public static void createWindow() {
@@ -53,12 +54,24 @@ public class Window implements Runnable {
             }
         }
     }
-
+    public void initTimer(){
+        var tm = new TimeListener();
+        Timer timer = new Timer(100, tm);
+        timer.start();
+    }
     private class TimeListener implements ActionListener {
+
+        boolean flop = false;
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            flop = !flop;
+            for(int x = 0; x < WIDTH; x++){
+                for(int y = 0; y < HEIGHT; y++){
+                    if(flop)boxes[x][y].step1();
+                    else boxes[x][y].step2();
+                }
+            }
         }
     }
 
@@ -67,6 +80,8 @@ public class Window implements Runnable {
             boxes[x][10].cell.setStatus(Status.LIVE);
         }
     }
+
+
 
 
 }

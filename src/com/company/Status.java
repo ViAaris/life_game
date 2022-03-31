@@ -22,12 +22,17 @@ public enum Status {
     }
 
     public Color getColor(){
-        return switch (this) {
-            case NONE -> Color.BLACK;
-            case DEAD -> Color.GRAY;
-            case BORN -> Color.PINK;
-            case LIVE -> Color.GREEN;
-        };
+        switch (this) {
+            default:
+            case NONE:
+                return Color.BLACK;
+            case LIVE:
+                return Color.WHITE;
+            case BORN:
+                return Color.RED;
+            case DEAD:
+                return Color.GRAY;
+        }
     }
 
 }
