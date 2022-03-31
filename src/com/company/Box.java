@@ -1,12 +1,14 @@
 package com.company;
 
 import com.sun.jna.platform.win32.WinUser;
+import net.sourceforge.htmlunit.corejs.javascript.tools.shell.Global;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import static com.company.Window.SIZE;
 
@@ -36,13 +38,11 @@ public class Box extends JPanel {
     }
 
     public void step1() {
-        cell.setStatus(cell.status.step1(cell.getHowManyAlive()));
-
+        cell.setStatus(cell.status.step1(cell.countAlive()));
     }
 
     public void step2() {
          cell.setStatus(cell.status.step2());
-
     }
 
 
@@ -51,28 +51,11 @@ public class Box extends JPanel {
         private Status status;
         private Color color;
         private ArrayList<Cell> nearCells = new ArrayList<Cell>();
-        private final int howManyAlive = countAlive();
 
-        public int getHowManyAlive() {
-            return howManyAlive;
-        }
-
-        public ArrayList<Cell> getNearCells() {
-            return nearCells;
-        }
 
         public Cell() {
             status = Status.NONE;
             color = status.getColor();
-        }
-
-//for testing
-        public void getCoord() {
-            System.out.println(Box.this.x + " " + Box.this.y);
-        }
-
-        public void addNearCell(Cell cell) {
-            nearCells.add(cell);
         }
 
         public int countAlive() {
@@ -82,6 +65,22 @@ public class Box extends JPanel {
             }
             return howManyAlive;
         }
+
+
+
+//for testing
+        public void getCoord() {
+            System.out.println(Box.this.x + " " + Box.this.y);
+        }
+        public ArrayList<Cell> getNearCells() {
+            return nearCells;
+        }
+
+        public void addNearCell(Cell cell) {
+            nearCells.add(cell);
+        }
+
+
 
         public boolean isAlive() {
             return status == Status.LIVE || status == Status.DEAD;
@@ -96,7 +95,6 @@ public class Box extends JPanel {
         public Color getColor() {
             return color;
         }
-
 
         public void turn() {
             for (Cell cell : nearCells) {
