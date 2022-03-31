@@ -39,19 +39,19 @@ public class Window implements Runnable {
 
         for (int x = 0; x < WIDTH; x++)
             for(int y = 0; y < HEIGHT; y++)
-                //boxes[x][y].findNearCells();
-                for (int sx = -1; sx <= +1; sx++) {
-                    for (int sy = -1; sy <= +1; sy++) {
-                        if (!(sx == 0 && sy == 0)) {
-                            boxes[x][y].cell.addNearCell(Window.boxes
-                                    [(x + sx + WIDTH) % WIDTH]
-                                    [(y + sy + HEIGHT) % HEIGHT].cell);
-                        }
-                    }
+                findNearCells(boxes[x][y]);
+    }
+
+        public static void findNearCells(Box box){
+        for (int sx = -1; sx <= +1; sx++) {
+            for (int sy = -1; sy <= +1; sy++) {
+                if (!(sx == 0 && sy == 0)) {
+                    box.cell.addNearCell(Window.boxes
+                            [(box.x + sx + WIDTH) % WIDTH]
+                            [(box.y + sy + HEIGHT) % HEIGHT].cell);
                 }
-
-
-
+            }
+        }
     }
 
     private class TimeListener implements ActionListener {

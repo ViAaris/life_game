@@ -33,17 +33,7 @@ public class Box extends JPanel{
         cell.status = cell.status.step2();
     }
 
-//    public void findNearCells(){
-//        for (int sx = -1; sx <= +1; sx++) {
-//            for (int sy = -1; sy <= +1; sy++) {
-//                if (!(sx == 0 && sy == 0)) {
-//                    this.cell.addNearCell(Window.boxes
-//                            [(x + sx + WIDTH) % WIDTH]
-//                            [(y + sy + HEIGHT) % HEIGHT].cell);
-//                }
-//            }
-//        }
-//    }
+
 
 
     public class Cell {
